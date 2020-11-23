@@ -31,10 +31,10 @@ Note : If you don't have git install before in your system, Just install by the 
 ## Step 1 : Configure Integration Server
 The main purpose of creating the VM that will work as an integration server. In the integration server, the server must have VCS property that developers can up to date their changes. If a change is detected by the integration server the build process will be starting again. 
 
-1. Get to the directory
+1. Get to the directory<br>
 `cd ~/<git_root_folder>/SEE_Devops/pipeline/serverintegration`
 
-2. Vagrant is used to create a Virtual Machine which acts as integration server.
+2. Vagrant is used to create a Virtual Machine which acts as integration server.<br>
 `sudo vagrant up`
 
 **Notes :**
@@ -77,15 +77,15 @@ The objective of this stage is to configure the GitLab project such that any upd
 ## Gitlab Runner Configure
 #### Install Gitlab Runner
 
-1. Make sure that you are in the working directory :
+1. Make sure that you are in the working directory :<br>
 `cd ~/<git_root_folder>/SEE_Devops/pipeline/serverintegration`
 
-2. Now enter into vagrant by this ssh command :
+2. Now enter into vagrant by this ssh command :<br>
 `sudo vagrant ssh`
 
 #### Register the Runner to Build imagegallery project
 
-1. Firstly, register the gilab-runner following command:
+1. Firstly, register the gilab-runner following command:<br>
 `sudo gitlab-runner register`
 
 2. Enter the requested information as follows:	
@@ -107,7 +107,7 @@ For GitLab instance URL enter:<br>
 7. Enter the Docker image (eg. ruby:2.1) enter:<br>
 `alpine:latest`
 
-8. Then Restart the runner:
+8. Then Restart the runner:<br>
 `sudo gitlab-runner restart`
 
 **Congratulation and automatic builod process is done if you followed avobe procedure.**
@@ -115,34 +115,34 @@ For GitLab instance URL enter:<br>
 	
 ## Step 2 : Configure Stage Server environment
 
-1. Again Go to working directory: 
+1. Again Go to working directory: <br>
 `cd ~/<git_root_folder>/SEE_Devops/pipeline/ServerStage`
 
-2. To create stage environment, run vagrant as VM .
+2. To create stage environment, run vagrant as VM .<br>
 `sudo vagrant up`
 
--- If everything is ok you will see at the end of the output:
+-- If everything is ok you will see at the end of the output:<br>
 `default : Done`
 
-**Warning and Solution :** If you see the tomcat server installing error( that can be happen for update tomcat version) just edit the following file in the specific line.Ohterwise ignore the warning.	
-`setup-tomcat.sh`
+**Warning and Solution :** If you see the tomcat server installing error( that can be happen for update tomcat version) just edit the following file in the specific line.Ohterwise ignore the warning.	<br>
+`setup-tomcat.sh`<br>
  in line : `curl -o apache-tomcat-9.0.40.tar.gz https://downloads.apache.org/tomcat/tomcat-9/v9.0.40/bin//apache-tomcat-9.0.40.tar.gz`
  
-3. Enter into vagrant environment of stage server:
+3. Enter into vagrant environment of stage server:<br>
 `sudo vagrant ssh`
 
-4. Run the Database script by following this command: 
+4. Run the Database script by following this command: <br>
 `mysql -u root -p12345678 < /vagrant_scripts/gallery.sql`
 
 **Notes :** 
-To check the database just go to 
+To check the database just go to <br>
 ```
 mysql -u root -p
 show databases;
 ```
 	
 5. Check Tomcat installation and configuration. 
-Open a browser, and try to access to these URLs:
+Open a browser, and try to access to these URLs:<br>
 ```
  http://192.168.33.17:8080
  http://192.168.33.17:8080/manager/html
@@ -150,14 +150,14 @@ Open a browser, and try to access to these URLs:
 
 **Notes**:
 * User and password are the same: "admin".
-* In case these URLs cannot be reached, then try to fix it by restarting tomcat:
+* In case these URLs cannot be reached, then try to fix it by restarting tomcat:<br>
 	
 ```sudo /opt/tomcat/bin/shutdown.sh	
 sudo /opt/tomcat/bin/startup.sh
 ```
 #### Register the Runner for deploying to stage server
 
-1. Firstly, register the gilab-runner following command:
+1. Firstly, register the gilab-runner following command:<br>
 `sudo gitlab-runner register`
 
 2. Enter the requested information as follows:	
@@ -177,23 +177,24 @@ For GitLab instance URL enter:<br>
 `shell`
 
 
-7. Then Restart the runner:
+7. Then Restart the runner:<br>
 `sudo gitlab-runner restart`
 
-8. Apply sudo permissions to the gitlab-runner
+8. Apply sudo permissions to the gitlab-runner <br>
 
 ```
 sudo usermod -a -G sudo gitlab-runner
 sudo visudo
 ```
-9. Now add the following to the down of the file:
+9. Now add the following to the down of the file: <br>
 
 ```
 gitlab-runner ALL=(ALL) NOPASSWD: ALL
 ```
+<br>
 Then save and exit (Ctl+X -> y)
 
-10. Then Restart the staging environment
+10. Then Restart the staging environment <br>
 
 ```
 exit
@@ -204,7 +205,7 @@ sudo vagrant reload
 the project if "Auto DevOps" is selected.
 To access to these settings, go to "Settings" -> "CI/CD" -> "Auto DevOps".
 
-11. Go to the working directory again : 
+11. Go to the working directory again : <br>
 `cd ~/<git_root_folder>/SEE_Devops/imagegallery`
 
 modify add a new line to end of the update.txt file  
@@ -212,7 +213,7 @@ Then commit and push file to repository
 
 After few seconds Have a look on the CI/CD -> Pipelines of the project.
 
-12. After completing the job check the product : 
+12. After completing the job check the product : <br>
 
 ```
 http://192.168.33.17:8080/imagegallery/
@@ -223,27 +224,27 @@ http://192.168.33.17:8080/imagegallery/
  
 ## Step 3 : Configure Production Server environment
 
-1. Again Go to working directory: 
+1. Again Go to working directory: <br>
 `cd ~/<git_root_folder>/SEE_Devops/pipeline/ServerfinalProduction`
 
-2. To create stage environment, run vagrant as VM .
+2. To create stage environment, run vagrant as VM . <br>
 `sudo vagrant up`
 
--- If everything is ok you will see at the end of the output:
+-- If everything is ok you will see at the end of the output: <br>
 `default : Done`
 
-**Warning and Solution :** If you see the tomcat server installing error( that can be happen for update tomcat version) just edit the following file in the specific line.Ohterwise ignore the warning.	
+**Warning and Solution :** If you see the tomcat server installing error( that can be happen for update tomcat version) just edit the following file in the specific line.Ohterwise ignore the warning.	<br>
 `setup-tomcat.sh`
  in line : `curl -o apache-tomcat-9.0.40.tar.gz https://downloads.apache.org/tomcat/tomcat-9/v9.0.40/bin//apache-tomcat-9.0.40.tar.gz`
  
-3. Enter into vagrant environment of stage server:
+3. Enter into vagrant environment of stage server: <br>
 `sudo vagrant ssh`
 
-4. Run the Database script by following this command: 
+4. Run the Database script by following this command:  <br>
 `mysql -u root -p12345678 < /vagrant_scripts/gallery.sql`
 
 **Notes :** 
-To check the database just go to 
+To check the database just go to  <br>
 ```
 mysql -u root -p
 show databases;
@@ -251,7 +252,7 @@ show databases;
 If Successfully done, Database name gallery is available.
 	
 5. Check Tomcat installation and configuration. 
-Open a browser, and try to access to these URLs:
+Open a browser, and try to access to these URLs:<br>
 ```
  http://192.168.33.18:8080
  http://192.168.33.18:8080/manager/html
@@ -259,14 +260,14 @@ Open a browser, and try to access to these URLs:
 
 **Notes**:
 * User and password are the same: "admin".
-* In case these URLs cannot be reached, then try to fix it by restarting tomcat:
+* In case these URLs cannot be reached, then try to fix it by restarting tomcat: <br>
 	
 ```sudo /opt/tomcat/bin/shutdown.sh	
 sudo /opt/tomcat/bin/startup.sh
 ```
 #### Register the Runner for deploying to stage server
 
-1. Firstly, register the gilab-runner following command:
+1. Firstly, register the gilab-runner following command: <br>
 `sudo gitlab-runner register`
 
 2. Enter the requested information as follows:	
@@ -286,23 +287,23 @@ For GitLab instance URL enter:<br>
 `shell`
 
 
-7. Then Restart the runner:
+7. Then Restart the runner:<br>
 `sudo gitlab-runner restart`
 
-8. Apply sudo permissions to the gitlab-runner
+8. Apply sudo permissions to the gitlab-runner <br>
 
 ```
 sudo usermod -a -G sudo gitlab-runner
 sudo visudo
 ```
-9. Now add the following to the down of the file:
+9. Now add the following to the down of the file:<br>
 
 ```
 gitlab-runner ALL=(ALL) NOPASSWD: ALL
 ```
 Then save and exit (Ctl+X -> y)
 
-10. Then Restart the staging environment
+10. Then Restart the staging environment <br>
 
 ```
 exit
@@ -313,7 +314,7 @@ sudo vagrant reload
 the project if "Auto DevOps" is selected.
 To access to these settings, go to "Settings" -> "CI/CD" -> "Auto DevOps".
 
-11. Go to the working directory again : 
+11. Go to the working directory again : <br>
 `cd ~/<git_root_folder>/SEE_Devops/imagegallery`
 
 modify add a new line to end of the update.txt file  
@@ -321,7 +322,7 @@ Then commit and push file to repository
 
 After few seconds Have a look on the CI/CD -> Pipelines of the project.
 
-12. After completing the job check the product : 
+12. After completing the job check the product : <br>
 
 ```
 http://192.168.33.18:8080/imagegallery/
