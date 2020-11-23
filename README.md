@@ -45,7 +45,7 @@ The main purpose of creating the VM that will work as an integration server. In 
 
 3. Connect to GitLab
 
-Open http://192.168.33.10/gitlab in your browser. <br>
+Open http://192.168.33.9/gitlab in your browser. <br>
 It will be asked to provide a password (refered as $YOUR_PASSWORD later) for the root credentials.
 To further login with root the credentials are: <br>
 Login: root <br>
@@ -90,7 +90,7 @@ The objective of this stage is to configure the GitLab project such that any upd
 
 2. Enter the requested information as follows:	
 For GitLab instance URL enter:<br>	
-`http://192.168.33.10/gitlab/`
+`http://192.168.33.9/gitlab/`
 
 3. Need to take gitlab-ci token to enter the generated token.<br>
 `Example: cy67fgsgskejlks89`
@@ -162,7 +162,7 @@ sudo /opt/tomcat/bin/startup.sh
 
 2. Enter the requested information as follows:	
 For GitLab instance URL enter:<br>	
-`http://192.168.33.10/gitlab/`
+`http://192.168.33.9/gitlab/`
 
 3. Need to take gitlab-ci token to enter the generated token.<br>
 `Example: cy67fgsgskejlks89`
@@ -272,7 +272,7 @@ sudo /opt/tomcat/bin/startup.sh
 
 2. Enter the requested information as follows:	
 For GitLab instance URL enter:<br>	
-`http://192.168.33.10/gitlab/`
+`http://192.168.33.9/gitlab/`
 
 3. Need to take gitlab-ci token to enter the generated token.<br>
 `Example: cy67fgsgskejlks89`
